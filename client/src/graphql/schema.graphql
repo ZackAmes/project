@@ -1,0 +1,15 @@
+query getEntities {
+  entities(keys: ["*"]) {
+    edges {
+      node {
+        keys
+        models {
+          __typename
+          ... on Secret {
+		value
+          }
+          }
+        }
+      }
+    }
+  }
