@@ -3,6 +3,7 @@ import { useComponentValue } from "@latticexyz/react";
 import { Entity } from "@latticexyz/recs";
 import { useEffect } from "react";
 import { setComponentsFromGraphQLEntities } from "@dojoengine/utils";
+import Secret from './components/Secret';
 
 function App() {
   const {
@@ -69,6 +70,7 @@ function App() {
       <div className="card">
         <button onClick={() => spawn(account)}>Spawn</button>
         <p> Secret: {secret ? `${secret["value"]}` : "Need to Spawn"} </p>
+        <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} />
         <button onClick={() => setSecret(account, 69)}> set secret</button>
       </div>
     </>
