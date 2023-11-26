@@ -4,6 +4,8 @@ import { Entity } from "@latticexyz/recs";
 import { useEffect } from "react";
 import { setComponentsFromGraphQLEntities } from "@dojoengine/utils";
 import Secret from './components/Secret';
+import Secreter from "./components/Secreter";
+import {Canvas} from '@react-three/fiber';
 
 function App() {
   const {
@@ -72,6 +74,12 @@ function App() {
         <p> Secret: {secret ? `${secret["value"]}` : "Need to Spawn"} </p>
         <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} />
         <button onClick={() => setSecret(account, 69)}> set secret</button>
+      </div>
+      <div id="canvas-container">
+        <Canvas>
+          <pointLight position={[10, 10, 10]} />
+          <Secreter value={secret ? parseInt(`${secret["value"]}`) : 0}/>
+        </Canvas>  
       </div>
     </>
   );

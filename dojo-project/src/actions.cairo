@@ -3,6 +3,7 @@
 trait IActions<TContractState> {
     fn spawn(self: @TContractState);
     fn setSecret(self: @TContractState, value: u8);
+    fn takeTurn(self: @TContractState, square: u8);
 
 }
 
@@ -17,13 +18,19 @@ mod actions {
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        Update: Update
+        Update: Update,
+        NewGame: NewGame
     }
 
     #[derive(Drop, starknet::Event)]
     struct Update {
         player: ContractAddress,
         value: u8
+    }
+
+    #[derive(Drop, starknet::Event)]
+    struct NewGame {
+        game_id: felt252
     }
 
     // impl: implement functions specified in trait
@@ -46,8 +53,16 @@ mod actions {
                     Secret {
                         player, value:0
                     },
+                    TicTacToe {
+                        game_id: 0, xTurn: true
+                    }
                 )
             );
+        }
+
+        fn takeTurn(self: @ContractState, x: u8, y: u8) {
+            let world = self.world_dispatcher.read();
+            
         }
 
         fn setSecret(self: @ContractState, value: u8) {
