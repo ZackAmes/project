@@ -1,18 +1,21 @@
 import {FC} from 'react';
-import { extend, Object3DNode } from '@react-three/fiber';
 import {Text} from '@react-three/drei';
+
 
 interface ButtonProps {
     label: string
-    click : () => Promise<void>
+    x:number
+    y:number
+    z:number
+    click : () => any
 } 
 
-const Button: FC<ButtonProps> = ({label, click}) => {
+const Button: FC<ButtonProps> = ({x, y, z, label, click}) => {
     return (
     <>
-        <mesh position={[2.2,0,0]} onClick={click}>
+        <mesh position={[x,y,z]} onClick={click}>
             <Text scale={[.5, .5, .5]}>
-                Hello world
+                {label}
             </Text>
             <meshBasicMaterial color="black"/>
         </mesh>

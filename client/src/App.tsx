@@ -49,13 +49,6 @@ function App() {
 
   return (
     <>
-      <div>
-        <button onClick={create}>
-          {isDeploying ? "deploying burner" : "create burner"}
-        </button>
-        <button onClick={clear}>clear burners</button>
-      </div>
-
       <div className="card">
         select signer:{" "}
         <select onChange={(e) => select(e.target.value)}>
@@ -69,15 +62,13 @@ function App() {
           i
         </select>
       </div>
-      <div className="card">
-        <button onClick={() => spawn(account)}>Spawn</button>
-        <p> Secret: {secret ? `${secret["value"]}` : "Need to Spawn"} </p>
-        <button onClick={() => setSecret(account, 69)}> set secret</button>
-      </div>
       <div id="canvas-container">
         <Canvas style={{height: 800, width:800}}>
           <pointLight position={[10, 10, 10]} />
-          <Button label={"spawn"} click={() => spawn(account)}/>
+          <Button x={2.2} y={0} z={0} label={"spawn"} click={() => spawn(account)}/>
+          <Button x={-2.2} y={2} z={0} label={"clear"} click={clear}/>
+          <Button x={2.2} y={2} z={0} label={"create"} click={create}/>
+
           <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 42)}/>
         </Canvas>  
       </div>
