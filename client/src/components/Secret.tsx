@@ -2,15 +2,22 @@ import React, {FC} from 'react';
 
 interface SecretProps {
     value: number
+    click: () => Promise<void>
 }
 
-const Secret: FC<SecretProps> = ({value}) => {
+const getColor = (value: number) => {
+    const rValue = value * 69 % 255;
+    return rValue
+}
+
+const Secret: FC<SecretProps> = ({value, click}) => {
     return (
-       <div> 
-            <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="150" cy="100" r="80" fill={"rgba(" + value + ", 0, 0, .3)"} />
-            </ svg>    
-        </div>
+        <>
+            <mesh onClick={click}>
+                <sphereGeometry />
+                <meshBasicMaterial color={"rgb(" + getColor(value) +",0,0)"} />
+            </mesh>
+        </>  
     )
 } 
 

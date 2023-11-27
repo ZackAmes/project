@@ -3,8 +3,8 @@ import { useComponentValue } from "@latticexyz/react";
 import { Entity } from "@latticexyz/recs";
 import { useEffect } from "react";
 import { setComponentsFromGraphQLEntities } from "@dojoengine/utils";
-import Secret from './components/Secret';
-import Secreter from "./components/Secreter";
+import Secret from "./components/Secret";
+import Button from "./components/Button";
 import {Canvas} from '@react-three/fiber';
 
 function App() {
@@ -72,13 +72,13 @@ function App() {
       <div className="card">
         <button onClick={() => spawn(account)}>Spawn</button>
         <p> Secret: {secret ? `${secret["value"]}` : "Need to Spawn"} </p>
-        <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} />
         <button onClick={() => setSecret(account, 69)}> set secret</button>
       </div>
       <div id="canvas-container">
-        <Canvas>
+        <Canvas style={{height: 800, width:800}}>
           <pointLight position={[10, 10, 10]} />
-          <Secreter value={secret ? parseInt(`${secret["value"]}`) : 0}/>
+          <Button label={"spawn"} click={() => spawn(account)}/>
+          <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 42)}/>
         </Canvas>  
       </div>
     </>
