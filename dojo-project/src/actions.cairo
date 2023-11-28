@@ -3,7 +3,7 @@
 trait IActions<TContractState> {
     fn spawn(self: @TContractState);
     fn setSecret(self: @TContractState, value: u8);
-    fn takeTurn(self: @TContractState, game_id: u8, x: u8, y: u8);
+    fn takeTurn(self: @TContractState, game_id: felt252, x: u8, y: u8);
 
 }
 
@@ -89,11 +89,25 @@ mod actions {
             );
         }
 
-        fn takeTurn(self: @ContractState, game_id: u8, x: u8, y: u8) {
+        fn takeTurn(self: @ContractState, game_id: felt252, x: u8, y: u8) {
             let world = self.world_dispatcher.read();
+            let square = get!(world, (game_id, x, y), (Square));
             
-            let game = get!(world, game_id, (TicTacToe));
+            assert(square.state == SquareValue::N, 'square taken');
 
+            let game = get!(world, game_id, (TicTacToe));
+            let turn = game.turn;
+            
+            if(turn) {
+                set!(world, Square {
+                    game_id: game_id, x: x, y: y, state: SquareValue::X
+                })
+            }
+            else {
+                 set!(world, Square {
+                    game_id: game_id, x: x, y: y, state: SquareValue::O
+                })
+            }            
 
         }
 
