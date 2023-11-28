@@ -9,5 +9,7 @@ export function createClientComponents({
   return {
     ...contractComponents,
     Secret: overridableComponent(contractComponents.Secret),
+    TicTacToe: overridableComponent(contractComponents.TicTacToe),
+    Square: overridableComponent(contractComponents.Square)
   };
 }
