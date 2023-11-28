@@ -6,7 +6,13 @@ query getEntities {
         models {
           __typename
           ... on Secret {
-		value
+		        value
+          }
+          ... on TicTacToe {
+            turn
+          }
+          ... on Square {
+            state
           }
           }
         }

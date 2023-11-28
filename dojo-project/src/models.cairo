@@ -26,6 +26,7 @@ struct Square {
 
 }
 
+#[derive(Serde, Drop, Copy, PartialEq, Introspect)]
 enum SquareValue {
     N: (),
     X: (),

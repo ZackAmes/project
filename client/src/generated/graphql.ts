@@ -19,11 +19,13 @@ export type Scalars = {
   ContractAddress: { input: any; output: any; }
   Cursor: { input: any; output: any; }
   DateTime: { input: any; output: any; }
+  Enum: { input: any; output: any; }
+  bool: { input: any; output: any; }
   felt252: { input: any; output: any; }
   u8: { input: any; output: any; }
 };
 
-export type ModelUnion = Secret;
+export type ModelUnion = Secret | Square | TicTacToe;
 
 export enum OrderDirection {
   Asc = 'ASC',
@@ -74,6 +76,110 @@ export type SecretWhereInput = {
   valueLT?: InputMaybe<Scalars['u8']['input']>;
   valueLTE?: InputMaybe<Scalars['u8']['input']>;
   valueNEQ?: InputMaybe<Scalars['u8']['input']>;
+};
+
+export type Square = {
+  __typename?: 'Square';
+  entity?: Maybe<World__Entity>;
+  game_id?: Maybe<Scalars['felt252']['output']>;
+  state?: Maybe<Scalars['Enum']['output']>;
+  x?: Maybe<Scalars['u8']['output']>;
+  y?: Maybe<Scalars['u8']['output']>;
+};
+
+export type SquareConnection = {
+  __typename?: 'SquareConnection';
+  edges?: Maybe<Array<Maybe<SquareEdge>>>;
+  total_count: Scalars['Int']['output'];
+};
+
+export type SquareEdge = {
+  __typename?: 'SquareEdge';
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  node?: Maybe<Square>;
+};
+
+export type SquareOrder = {
+  direction: OrderDirection;
+  field: SquareOrderField;
+};
+
+export enum SquareOrderField {
+  GameId = 'GAME_ID',
+  State = 'STATE',
+  X = 'X',
+  Y = 'Y'
+}
+
+export type SquareWhereInput = {
+  game_id?: InputMaybe<Scalars['felt252']['input']>;
+  game_idEQ?: InputMaybe<Scalars['felt252']['input']>;
+  game_idGT?: InputMaybe<Scalars['felt252']['input']>;
+  game_idGTE?: InputMaybe<Scalars['felt252']['input']>;
+  game_idLT?: InputMaybe<Scalars['felt252']['input']>;
+  game_idLTE?: InputMaybe<Scalars['felt252']['input']>;
+  game_idNEQ?: InputMaybe<Scalars['felt252']['input']>;
+  state?: InputMaybe<Scalars['Enum']['input']>;
+  x?: InputMaybe<Scalars['u8']['input']>;
+  xEQ?: InputMaybe<Scalars['u8']['input']>;
+  xGT?: InputMaybe<Scalars['u8']['input']>;
+  xGTE?: InputMaybe<Scalars['u8']['input']>;
+  xLT?: InputMaybe<Scalars['u8']['input']>;
+  xLTE?: InputMaybe<Scalars['u8']['input']>;
+  xNEQ?: InputMaybe<Scalars['u8']['input']>;
+  y?: InputMaybe<Scalars['u8']['input']>;
+  yEQ?: InputMaybe<Scalars['u8']['input']>;
+  yGT?: InputMaybe<Scalars['u8']['input']>;
+  yGTE?: InputMaybe<Scalars['u8']['input']>;
+  yLT?: InputMaybe<Scalars['u8']['input']>;
+  yLTE?: InputMaybe<Scalars['u8']['input']>;
+  yNEQ?: InputMaybe<Scalars['u8']['input']>;
+};
+
+export type TicTacToe = {
+  __typename?: 'TicTacToe';
+  entity?: Maybe<World__Entity>;
+  game_id?: Maybe<Scalars['felt252']['output']>;
+  turn?: Maybe<Scalars['bool']['output']>;
+};
+
+export type TicTacToeConnection = {
+  __typename?: 'TicTacToeConnection';
+  edges?: Maybe<Array<Maybe<TicTacToeEdge>>>;
+  total_count: Scalars['Int']['output'];
+};
+
+export type TicTacToeEdge = {
+  __typename?: 'TicTacToeEdge';
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  node?: Maybe<TicTacToe>;
+};
+
+export type TicTacToeOrder = {
+  direction: OrderDirection;
+  field: TicTacToeOrderField;
+};
+
+export enum TicTacToeOrderField {
+  GameId = 'GAME_ID',
+  Turn = 'TURN'
+}
+
+export type TicTacToeWhereInput = {
+  game_id?: InputMaybe<Scalars['felt252']['input']>;
+  game_idEQ?: InputMaybe<Scalars['felt252']['input']>;
+  game_idGT?: InputMaybe<Scalars['felt252']['input']>;
+  game_idGTE?: InputMaybe<Scalars['felt252']['input']>;
+  game_idLT?: InputMaybe<Scalars['felt252']['input']>;
+  game_idLTE?: InputMaybe<Scalars['felt252']['input']>;
+  game_idNEQ?: InputMaybe<Scalars['felt252']['input']>;
+  turn?: InputMaybe<Scalars['bool']['input']>;
+  turnEQ?: InputMaybe<Scalars['bool']['input']>;
+  turnGT?: InputMaybe<Scalars['bool']['input']>;
+  turnGTE?: InputMaybe<Scalars['bool']['input']>;
+  turnLT?: InputMaybe<Scalars['bool']['input']>;
+  turnLTE?: InputMaybe<Scalars['bool']['input']>;
+  turnNEQ?: InputMaybe<Scalars['bool']['input']>;
 };
 
 export type World__Content = {
@@ -183,6 +289,8 @@ export type World__Query = {
   model: World__Model;
   models?: Maybe<World__ModelConnection>;
   secretModels?: Maybe<SecretConnection>;
+  squareModels?: Maybe<SquareConnection>;
+  tictactoeModels?: Maybe<TicTacToeConnection>;
   transaction: World__Transaction;
   transactions?: Maybe<World__TransactionConnection>;
 };
@@ -249,6 +357,30 @@ export type World__QuerySecretModelsArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order?: InputMaybe<SecretOrder>;
   where?: InputMaybe<SecretWhereInput>;
+};
+
+
+export type World__QuerySquareModelsArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order?: InputMaybe<SquareOrder>;
+  where?: InputMaybe<SquareWhereInput>;
+};
+
+
+export type World__QueryTictactoeModelsArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order?: InputMaybe<TicTacToeOrder>;
+  where?: InputMaybe<TicTacToeWhereInput>;
 };
 
 
@@ -321,7 +453,7 @@ export type World__TransactionEdge = {
 export type GetEntitiesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEntitiesQuery = { __typename?: 'World__Query', entities?: { __typename?: 'World__EntityConnection', edges?: Array<{ __typename?: 'World__EntityEdge', node?: { __typename?: 'World__Entity', keys?: Array<string | null> | null, models?: Array<{ __typename: 'Secret', value?: any | null } | null> | null } | null } | null> | null } | null };
+export type GetEntitiesQuery = { __typename?: 'World__Query', entities?: { __typename?: 'World__EntityConnection', edges?: Array<{ __typename?: 'World__EntityEdge', node?: { __typename?: 'World__Entity', keys?: Array<string | null> | null, models?: Array<{ __typename: 'Secret', value?: any | null } | { __typename: 'Square', state?: any | null } | { __typename: 'TicTacToe', turn?: any | null } | null> | null } | null } | null> | null } | null };
 
 
 export const GetEntitiesDocument = gql`
@@ -334,6 +466,12 @@ export const GetEntitiesDocument = gql`
           __typename
           ... on Secret {
             value
+          }
+          ... on TicTacToe {
+            turn
+          }
+          ... on Square {
+            state
           }
         }
       }

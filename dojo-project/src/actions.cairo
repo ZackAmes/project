@@ -3,7 +3,7 @@
 trait IActions<TContractState> {
     fn spawn(self: @TContractState);
     fn setSecret(self: @TContractState, value: u8);
-    fn takeTurn(self: @TContractState, square: u8);
+    fn takeTurn(self: @TContractState, game_id: u8, x: u8, y: u8);
 
 }
 
@@ -11,7 +11,7 @@ trait IActions<TContractState> {
 #[dojo::contract]
 mod actions {
     use starknet::{ContractAddress, get_caller_address};
-    use project::models::{Secret};
+    use project::models::{Secret, Square, TicTacToe, SquareValue};
     use super::IActions;
 
     // declaring custom event struct
@@ -54,15 +54,47 @@ mod actions {
                         player, value:0
                     },
                     TicTacToe {
-                        game_id: 0, xTurn: true
+                        game_id: 0, turn: true
+                    },
+                    Square {
+                        game_id: 0, x: 0, y:0, state: SquareValue::N
+                    },
+                    Square {
+                        game_id: 0, x: 1, y:0, state: SquareValue::N
+                    },
+                    Square {
+                        game_id: 0, x: 2, y:0, state: SquareValue::N
+                    },
+                    Square {
+                        game_id: 0, x: 0, y:1, state: SquareValue::N
+                    },
+                    Square {
+                        game_id: 0, x: 1, y:1, state: SquareValue::N
+                    },
+                    Square {
+                        game_id: 0, x: 2, y:1, state: SquareValue::N
+                    },
+                    Square {
+                        game_id: 0, x: 0, y:2, state: SquareValue::N
+                    },
+                    Square {
+                        game_id: 0, x: 1, y:2, state: SquareValue::N
+                    },
+                    Square {
+                        game_id: 0, x: 2, y:2, state: SquareValue::N
                     }
+
+
                 )
             );
         }
 
-        fn takeTurn(self: @ContractState, x: u8, y: u8) {
+        fn takeTurn(self: @ContractState, game_id: u8, x: u8, y: u8) {
             let world = self.world_dispatcher.read();
             
+            let game = get!(world, game_id, (TicTacToe));
+
+
         }
 
         fn setSecret(self: @ContractState, value: u8) {

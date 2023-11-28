@@ -16,5 +16,29 @@ export function defineContractComponents(world: World) {
 	      }
 	    );
 	  })(),
+	  Square: (() => {
+	    return defineComponent(
+	      world,
+	      { game_id: RecsType.Number, x: RecsType.Number, y: RecsType.Number, state: RecsType.Number },
+	      {
+	        metadata: {
+	          name: "Square",
+	          types: ["Direction"],
+	        },
+	      }
+	    );
+	  })(),
+	  TicTacToe: (() => {
+	    return defineComponent(
+	      world,
+	      { game_id: RecsType.Number, turn: RecsType.Boolean },
+	      {
+	        metadata: {
+	          name: "TicTacToe",
+	          types: [],
+	        },
+	      }
+	    );
+	  })(),
   };
 }
