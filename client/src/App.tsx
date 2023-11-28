@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { setComponentsFromGraphQLEntities } from "@dojoengine/utils";
 import Secret from "./components/Secret";
 import Button from "./components/Button";
+import Square from "./components/Square";
 import {Canvas} from '@react-three/fiber';
 
 function App() {
@@ -68,12 +69,13 @@ function App() {
           <Button x={2.2} y={0} z={0} label={"spawn"} click={() => spawn(account)}/>
           <Button x={-2.2} y={2} z={0} label={"clear"} click={clear}/>
           <Button x={2.2} y={2} z={0} label={"create"} click={create}/>
-
-          <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 42)}/>
+          <Square x={0} y={0} z={0} state={" "}/>
+          
         </Canvas>  
       </div>
     </>
   );
+  //<Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 42)}/>
 }
 
 export default App;

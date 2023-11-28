@@ -1,23 +1,29 @@
 import {FC} from 'react';
 import {Text} from '@react-three/drei';
-import { BoxGeometry } from 'three';
 
 interface SquareProps {
     x: number,
     y: number,
     z: number,
-    xIndex: number,
-    yIndex:number,
+    xIndex?: number,
+    yIndex?:number,
     state: string,
-    click: () => any
+    click?: () => any
 
 }
 
-const Square: FC<SquareProps> = ({x,y,z,xIndex,yIndex,click}) => {
+const Square: FC<SquareProps> = ({x,y,z,xIndex,yIndex,state, click}) => {
     return (
         <>
-            <mesh position = {[x,y,z]}>
+
+            <mesh position = {[x,y,z-1]}>
                 <boxGeometry/>
+                <meshBasicMaterial color="red"/>
+            </mesh>
+            <mesh position = {[x,y-.1,z]} scale={.75}>
+                <Text color="black">
+                    O
+                </Text>
             </mesh>
         </>
     )

@@ -9,7 +9,7 @@ export type SystemCalls = ReturnType<typeof createSystemCalls>;
 
 export function createSystemCalls(
   { execute, contractComponents }: SetupNetworkResult,
-  { Secret }: ClientComponents
+  { Secret, TicTacToe, Square }: ClientComponents
 ) {
   const spawn = async (signer: Account) => {
     const entityId = signer.address.toString() as Entity;
