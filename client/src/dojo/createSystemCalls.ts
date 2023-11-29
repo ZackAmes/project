@@ -37,6 +37,24 @@ export function createSystemCalls(
       Secret.removeOverride(secretId);
     }
   };
+  
+  const takeTurn = async (signer: Account, game_id: string, x: number, y:number) => {
+    const entityId = game_id as Entity;
+
+    try {
+      const tx = await execute(signer, "actions", "takeTurn", [game_id, x, y]);
+      setComponentsFromEvents(
+        contractComponents,
+        getEvents(
+          await signer.waitForTransaction(tx.transaction_hash, {
+            retryInterval: 100,
+          })
+        )
+      );
+    } catch (e) {
+      console.log(e);
+    } 
+  }
 
   const setSecret = async (signer: Account, value: number) => {
     const entityId = signer.address.toString() as Entity;
@@ -68,5 +86,6 @@ export function createSystemCalls(
   return {
     spawn,
     setSecret,
+    takeTurn,
   };
 }
