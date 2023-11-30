@@ -5,6 +5,7 @@ import { Account, num } from "starknet";
 import { GraphQLClient } from "graphql-request";
 import { getSdk } from "../generated/graphql";
 import manifest from "../../../dojo-project/target/dev/manifest.json";
+import * as torii from "@dojoengine/torii-client"
 
 export type SetupNetworkResult = Awaited<ReturnType<typeof setupNetwork>>;
 
@@ -20,10 +21,17 @@ export async function setupNetwork() {
     VITE_PUBLIC_NODE_URL
   );
 
+  const torii_client = await torii.createClient([], {
+    rpcUrl: VITE_PUBLIC_NODE_URL,
+    toriiUrl: VITE_PUBLIC_TORII,
+    worldAddress: VITE_PUBLIC_WORLD_ADDRESS
+  });
+
   // Return the setup object.
   return {
     provider,
     world,
+    torii_client,
 
     // Define contract components for the world.
     contractComponents: defineContractComponents(world),

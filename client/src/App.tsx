@@ -1,7 +1,6 @@
 import { useDojo } from "./DojoContext";
-import { useComponentValue } from "@latticexyz/react";
-import { Entity } from "@latticexyz/recs";
-import { useEffect } from "react";
+import { useComponentValue, useSync } from "@dojoengine/react";
+import { Entity } from "@dojoengine/recs";
 import { setComponentsFromGraphQLEntities, getEntityIdFromKeys } from "@dojoengine/utils";
 import Secret from "./components/Secret";
 import Button from "./components/Button";
@@ -13,7 +12,13 @@ function App() {
     setup: {
       systemCalls: { spawn, setSecret, takeTurn },
       components,
-      network: { graphSdk, contractComponents },
+      network: { graphSdk, contractComponents:{
+        Secret: SecretContract,
+        TicTacToe: TicTacToeContract,
+        Square: SquareContract 
+      },
+      torii_client,
+     },
     },
     account: { create, list, select, account, isDeploying, clear },
   } = useDojo();
@@ -22,7 +27,7 @@ function App() {
   const { getEntities } = graphSdk();
 
   // entity id - this example uses the account address as the entity id
-  const entityId = account.address.toString();
+  const entityId = account.address.toString() as Entity;
 
   // get current component values
   const secret = useComponentValue(components.Secret, entityId as Entity);
@@ -52,27 +57,10 @@ function App() {
   const square20 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(2),BigInt(0)]));  
   const square21 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(2),BigInt(1)]));  
   const square22 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(2),BigInt(2)]));  
-
+ 
   // use graphql to current state data
-  useEffect(() => {
-    if (!entityId) return;
-
-    const fetchData = async () => {
-      try {
-        const { data } = await getEntities();
-        if (data && data.entities) {
-          setComponentsFromGraphQLEntities(
-            contractComponents,
-            data.entities.edges
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [entityId, contractComponents]);
+  useSync(torii_client, SecretContract, [entityId])
+  // useSync(torii_client, SquareContract, squareIds.flat())
 
   return (
     <>
