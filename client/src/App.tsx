@@ -27,6 +27,22 @@ function App() {
   // get current component values
   const secret = useComponentValue(components.Secret, entityId as Entity);
   
+  const squares = [];
+  const squareIds = [];
+
+  for(let i=0; i<3; i++){
+    let tempSquares = []
+    let tempIds = []
+    for(let j=0; j<3; j++){
+      tempIds.push(getEntityIdFromKeys([BigInt(0),BigInt(i),BigInt(j)]))
+      tempSquares.push(useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(i),BigInt(j)])))
+    }
+    squares.push(tempSquares)
+    squareIds.push(tempIds)
+  }
+
+  console.log(squares)
+  console.log(squareIds)
   const square00 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(0),BigInt(0)]));
   const square01 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(0),BigInt(1)]));  
   const square02 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(0),BigInt(2)]));  
@@ -80,7 +96,7 @@ function App() {
           <Button x={-2.2} y={2} z={0} label={"clear"} click={clear}/>
           <Button x={2.2} y={2} z={0} label={"create"} click={create}/>
           <Square x={0} y={0} z={0} 
-            state={square11 ? `${square11["state"]}` : " "}
+            state={squares[1][1] ? squares[1][1].state : " "}
             color="green" click={() => takeTurn(account, "0", 1, 1)}
           />
           <Square x={1} y={0} z={0} 
