@@ -7,7 +7,6 @@ import Secret from "./components/Secret";
 import Button from "./components/Button";
 import Square from "./components/Square";
 import {Canvas} from '@react-three/fiber';
-import { parseBytes32String } from "ethers/lib/utils";
 
 function App() {
   const {
@@ -27,6 +26,7 @@ function App() {
 
   // get current component values
   const secret = useComponentValue(components.Secret, entityId as Entity);
+  
   const square00 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(0),BigInt(0)]));
   const square01 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(0),BigInt(1)]));  
   const square02 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(0),BigInt(2)]));  

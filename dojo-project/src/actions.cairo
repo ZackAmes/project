@@ -107,7 +107,10 @@ mod actions {
                  set!(world, Square {
                     game_id: game_id, x: x, y: y, state: SquareValue::O
                 })
-            }            
+            }           
+            set!(world, TicTacToe {
+                game_id: game_id, turn: !turn
+            }) 
 
         }
 
