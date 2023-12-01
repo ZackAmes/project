@@ -7,6 +7,7 @@ import Button from "./components/Button";
 import Board from "./components/Board";
 import {Canvas} from '@react-three/fiber';
 import { FlyControls } from "@react-three/drei";
+import {Euler} from 'three'
 
 function App() {
   const {
@@ -48,18 +49,8 @@ function App() {
 
   console.log(squareStates)
   console.log(squareIds)
-  const square00 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(0),BigInt(0)]));
-  const square01 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(0),BigInt(1)]));  
-  const square02 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(0),BigInt(2)]));  
-  const square10 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(1),BigInt(0)]));  
-  const square11 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(1),BigInt(1)]));  
-  const square12 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(1),BigInt(2)]));  
-  const square20 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(2),BigInt(0)]));  
-  const square21 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(2),BigInt(1)]));  
-  const square22 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(2),BigInt(2)]));  
- 
   // use graphql to current state data
-  //useSync(torii_client, SecretContract, [entityId])
+  useSync(torii_client, SecretContract, [entityId])
   // useSync(torii_client, SquareContract, squareIds.flat())
 
   return (
@@ -79,7 +70,7 @@ function App() {
       </div>
       <div id="canvas-container">
         <Canvas style={{height: 800, width:800}} camera={{ position: [0, 0, 5], zoom: 1, up: [0, 0, 1], far: 10000 }}>
-          <FlyControls dragToLook={true} />
+          <FlyControls dragToLook={true} rotation={new Euler(0, 1.5, 0, "XYZ")}/>
           <pointLight position={[10, 10, 10]} />
           <Button x={2.2} y={0} z={0} label={"spawn"} click={() => spawn(account)}/>
           <Button x={-2.2} y={2} z={0} label={"clear"} click={clear}/>
@@ -87,7 +78,7 @@ function App() {
           <Board account={account} game_id="0" components={components} 
                  takeTurn={takeTurn} coords={[0,0,0]} squareStates={squareStates}
           />
-          <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 42)}/>
+          <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 155)}/>
 
           
         </Canvas>  
