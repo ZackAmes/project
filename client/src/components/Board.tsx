@@ -28,45 +28,61 @@ const Board: FC<BoardProps> = ({game_id, components, account, takeTurn}) => {
 
     return (
         <>
-        <mesh >
-            <boxGeometry args={[.01, 2, 1]} />
+        <mesh position={[.5, 0, -1]}>
+            <boxGeometry args={[.01, 3, .1]} />
             <meshBasicMaterial color="red"/>
+            <boxGeometry args={[3, .01, .1]} />
+        </mesh>
+        <mesh position={[-.5, 0, -1]}>
+            <boxGeometry args={[.01, 3, .1]} />
+            <meshBasicMaterial color="red"/>
+        </mesh>
+        <mesh position={[0, .5, -1]}>
+            <meshBasicMaterial color="red"/>
+        </mesh>
+        <mesh position={[0, -.5, -1]}>
+            <boxGeometry args={[3, .01, .1]} />
+            <meshBasicMaterial color="red"/>
+        </mesh>
+        <mesh position ={[0,0,-3.5]}>
+            <boxGeometry args={[5, 5, .1]}/>
+            <meshBasicMaterial color = "blue"/>
         </mesh>
         <Square x={0} y={0} z={0} 
             state={square11 ? `${square11["state"]}` : " "}
-            color="green" click={() => takeTurn(account, "0", 1, 1)}
+            color="white" click={() => takeTurn(account, "0", 1, 1)}
         />
         <Square x={1} y={0} z={0} 
             state={square21 ? `${square21["state"]}` : " "}
-            color="blue" click={() => takeTurn(account, "0", 2, 1)}
+            color="white" click={() => takeTurn(account, "0", 2, 1)}
         />
         <Square x={-1} y={0} z={0} 
             state={square01 ? `${square01["state"]}` : " "} 
-            color="black" click={() => takeTurn(account, "0", 0, 1)}
+            color="white" click={() => takeTurn(account, "0", 0, 1)}
         />
         <Square x={0} y={1} z={0} 
             state={square12 ? `${square12["state"]}` : " "} 
-            color="black" click={() => takeTurn(account, "0", 1, 2)}
+            color="white" click={() => takeTurn(account, "0", 1, 2)}
         />
         <Square x={1} y={1} z={0} 
             state={square22 ? `${square22["state"]}` : " "} 
-            color="black" click={() => takeTurn(account, "0", 2, 2)}
+            color="white" click={() => takeTurn(account, "0", 2, 2)}
         />
         <Square x={-1} y={1} z={0} 
             state={square02 ? `${square02["state"]}` : " "} 
-            color="black" click={() => takeTurn(account, "0", 0, 2)}
+            color="white" click={() => takeTurn(account, "0", 0, 2)}
         />
         <Square x={0} y={-1} z={0} 
             state={square10 ? `${square10["state"]}` : " "} 
-            color="black" click={() => takeTurn(account, "0", 1, 0)}
+            color="white" click={() => takeTurn(account, "0", 1, 0)}
         />
         <Square x={1} y={-1} z={0} 
             state={square20 ? `${square20["state"]}` : " "} 
-            color="black" click={() => takeTurn(account, "0", 2, 0)}
+            color="white" click={() => takeTurn(account, "0", 2, 0)}
         />
         <Square x={-1} y={-1} z={0}
             state={square00 ? `${square00["state"]}` : " "}
-            color="black" click={() => takeTurn(account, "0", 0, 0)}
+            color="white" click={() => takeTurn(account, "0", 0, 0)}
         />
         </>
     )

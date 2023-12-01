@@ -12,11 +12,9 @@ function App() {
     setup: {
       systemCalls: { spawn, setSecret, takeTurn },
       components,
-      network: { graphSdk, contractComponents:{
-        Secret: SecretContract,
-        TicTacToe: TicTacToeContract,
-        Square: SquareContract 
-      },
+      network: { graphSdk, contractComponents
+        //:{Secret: SecretContract,TicTacToe: TicTacToeContract,Square: SquareContract }
+        ,
       torii_client,
      },
     },
@@ -59,7 +57,7 @@ function App() {
   const square22 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(2),BigInt(2)]));  
  
   // use graphql to current state data
-  useSync(torii_client, SecretContract, [entityId])
+  //useSync(torii_client, SecretContract, [entityId])
   // useSync(torii_client, SquareContract, squareIds.flat())
 
   return (
