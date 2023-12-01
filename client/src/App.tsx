@@ -6,15 +6,17 @@ import Secret from "./components/Secret";
 import Button from "./components/Button";
 import Square from "./components/Square";
 import {Canvas} from '@react-three/fiber';
+import { MapControls } from "@react-three/drei";
 
 function App() {
   const {
     setup: {
       systemCalls: { spawn, setSecret, takeTurn },
       components,
-      network: { graphSdk, contractComponents
-        //:{Secret: SecretContract,TicTacToe: TicTacToeContract,Square: SquareContract }
-        ,
+      network: { graphSdk, contractComponents:{
+        Secret: SecretContract,
+        TicTacToe: TicTacToeContract,
+        Square: SquareContract },
       torii_client,
      },
     },
@@ -57,7 +59,7 @@ function App() {
   const square22 = useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(2),BigInt(2)]));  
  
   // use graphql to current state data
-  //useSync(torii_client, SecretContract, [entityId])
+  useSync(torii_client, SecretContract, [entityId])
   // useSync(torii_client, SquareContract, squareIds.flat())
 
   return (
@@ -76,7 +78,8 @@ function App() {
         </select>
       </div>
       <div id="canvas-container">
-        <Canvas style={{height: 800, width:800}}>
+        <Canvas style={{height: 800, width:800}} camera={{ position: [0, 0, 5], zoom: 1, up: [0, 0, 1], far: 10000 }}>
+          <MapControls/>
           <pointLight position={[10, 10, 10]} />
           <Button x={2.2} y={0} z={0} label={"spawn"} click={() => spawn(account)}/>
           <Button x={-2.2} y={2} z={0} label={"clear"} click={clear}/>
