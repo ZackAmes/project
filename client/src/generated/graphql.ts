@@ -19,7 +19,6 @@ export type Scalars = {
   ContractAddress: { input: any; output: any; }
   Cursor: { input: any; output: any; }
   DateTime: { input: any; output: any; }
-  Enum: { input: any; output: any; }
   bool: { input: any; output: any; }
   felt252: { input: any; output: any; }
   u8: { input: any; output: any; }
@@ -42,6 +41,7 @@ export type Secret = {
 export type SecretConnection = {
   __typename?: 'SecretConnection';
   edges?: Maybe<Array<Maybe<SecretEdge>>>;
+  page_info: World__PageInfo;
   total_count: Scalars['Int']['output'];
 };
 
@@ -82,7 +82,7 @@ export type Square = {
   __typename?: 'Square';
   entity?: Maybe<World__Entity>;
   game_id?: Maybe<Scalars['felt252']['output']>;
-  state?: Maybe<Scalars['Enum']['output']>;
+  value?: Maybe<Scalars['u8']['output']>;
   x?: Maybe<Scalars['u8']['output']>;
   y?: Maybe<Scalars['u8']['output']>;
 };
@@ -90,6 +90,7 @@ export type Square = {
 export type SquareConnection = {
   __typename?: 'SquareConnection';
   edges?: Maybe<Array<Maybe<SquareEdge>>>;
+  page_info: World__PageInfo;
   total_count: Scalars['Int']['output'];
 };
 
@@ -106,7 +107,7 @@ export type SquareOrder = {
 
 export enum SquareOrderField {
   GameId = 'GAME_ID',
-  State = 'STATE',
+  Value = 'VALUE',
   X = 'X',
   Y = 'Y'
 }
@@ -119,7 +120,13 @@ export type SquareWhereInput = {
   game_idLT?: InputMaybe<Scalars['felt252']['input']>;
   game_idLTE?: InputMaybe<Scalars['felt252']['input']>;
   game_idNEQ?: InputMaybe<Scalars['felt252']['input']>;
-  state?: InputMaybe<Scalars['Enum']['input']>;
+  value?: InputMaybe<Scalars['u8']['input']>;
+  valueEQ?: InputMaybe<Scalars['u8']['input']>;
+  valueGT?: InputMaybe<Scalars['u8']['input']>;
+  valueGTE?: InputMaybe<Scalars['u8']['input']>;
+  valueLT?: InputMaybe<Scalars['u8']['input']>;
+  valueLTE?: InputMaybe<Scalars['u8']['input']>;
+  valueNEQ?: InputMaybe<Scalars['u8']['input']>;
   x?: InputMaybe<Scalars['u8']['input']>;
   xEQ?: InputMaybe<Scalars['u8']['input']>;
   xGT?: InputMaybe<Scalars['u8']['input']>;
@@ -146,6 +153,7 @@ export type TicTacToe = {
 export type TicTacToeConnection = {
   __typename?: 'TicTacToeConnection';
   edges?: Maybe<Array<Maybe<TicTacToeEdge>>>;
+  page_info: World__PageInfo;
   total_count: Scalars['Int']['output'];
 };
 
@@ -174,12 +182,6 @@ export type TicTacToeWhereInput = {
   game_idLTE?: InputMaybe<Scalars['felt252']['input']>;
   game_idNEQ?: InputMaybe<Scalars['felt252']['input']>;
   turn?: InputMaybe<Scalars['bool']['input']>;
-  turnEQ?: InputMaybe<Scalars['bool']['input']>;
-  turnGT?: InputMaybe<Scalars['bool']['input']>;
-  turnGTE?: InputMaybe<Scalars['bool']['input']>;
-  turnLT?: InputMaybe<Scalars['bool']['input']>;
-  turnLTE?: InputMaybe<Scalars['bool']['input']>;
-  turnNEQ?: InputMaybe<Scalars['bool']['input']>;
 };
 
 export type World__Content = {
@@ -198,7 +200,6 @@ export type World__Entity = {
   event_id?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   keys?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  model_names?: Maybe<Scalars['String']['output']>;
   models?: Maybe<Array<Maybe<ModelUnion>>>;
   updated_at?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -206,6 +207,7 @@ export type World__Entity = {
 export type World__EntityConnection = {
   __typename?: 'World__EntityConnection';
   edges?: Maybe<Array<Maybe<World__EntityEdge>>>;
+  page_info: World__PageInfo;
   total_count: Scalars['Int']['output'];
 };
 
@@ -227,6 +229,7 @@ export type World__Event = {
 export type World__EventConnection = {
   __typename?: 'World__EventConnection';
   edges?: Maybe<Array<Maybe<World__EventEdge>>>;
+  page_info: World__PageInfo;
   total_count: Scalars['Int']['output'];
 };
 
@@ -250,6 +253,7 @@ export type World__Metadata = {
 export type World__MetadataConnection = {
   __typename?: 'World__MetadataConnection';
   edges?: Maybe<Array<Maybe<World__MetadataEdge>>>;
+  page_info: World__PageInfo;
   total_count: Scalars['Int']['output'];
 };
 
@@ -271,6 +275,7 @@ export type World__Model = {
 export type World__ModelConnection = {
   __typename?: 'World__ModelConnection';
   edges?: Maybe<Array<Maybe<World__ModelEdge>>>;
+  page_info: World__PageInfo;
   total_count: Scalars['Int']['output'];
 };
 
@@ -278,6 +283,14 @@ export type World__ModelEdge = {
   __typename?: 'World__ModelEdge';
   cursor?: Maybe<Scalars['Cursor']['output']>;
   node?: Maybe<World__Model>;
+};
+
+export type World__PageInfo = {
+  __typename?: 'World__PageInfo';
+  end_cursor?: Maybe<Scalars['Cursor']['output']>;
+  has_next_page?: Maybe<Scalars['Boolean']['output']>;
+  has_previous_page?: Maybe<Scalars['Boolean']['output']>;
+  start_cursor?: Maybe<Scalars['Cursor']['output']>;
 };
 
 export type World__Query = {
@@ -441,6 +454,7 @@ export type World__Transaction = {
 export type World__TransactionConnection = {
   __typename?: 'World__TransactionConnection';
   edges?: Maybe<Array<Maybe<World__TransactionEdge>>>;
+  page_info: World__PageInfo;
   total_count: Scalars['Int']['output'];
 };
 
@@ -453,7 +467,7 @@ export type World__TransactionEdge = {
 export type GetEntitiesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEntitiesQuery = { __typename?: 'World__Query', entities?: { __typename?: 'World__EntityConnection', edges?: Array<{ __typename?: 'World__EntityEdge', node?: { __typename?: 'World__Entity', keys?: Array<string | null> | null, models?: Array<{ __typename: 'Secret', value?: any | null } | { __typename: 'Square', state?: any | null } | { __typename: 'TicTacToe', turn?: any | null } | null> | null } | null } | null> | null } | null };
+export type GetEntitiesQuery = { __typename?: 'World__Query', entities?: { __typename?: 'World__EntityConnection', edges?: Array<{ __typename?: 'World__EntityEdge', node?: { __typename?: 'World__Entity', keys?: Array<string | null> | null, models?: Array<{ __typename: 'Secret', value?: any | null } | { __typename: 'Square', value?: any | null } | { __typename: 'TicTacToe', turn?: any | null } | null> | null } | null } | null> | null } | null };
 
 
 export const GetEntitiesDocument = gql`
@@ -471,7 +485,7 @@ export const GetEntitiesDocument = gql`
             turn
           }
           ... on Square {
-            state
+            value
           }
         }
       }

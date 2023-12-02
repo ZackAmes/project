@@ -9,7 +9,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "codegen": "graphql-codegen",
-    "create-components": "npx @dojoengine/core ../dojo-project/target/dev/manifest.json src/dojo/contractComponents.ts http://localhost:5050 0x6191684f3b6db8c6175cef4defc06d3d1d37a0a5cfd73d49cc6a9544bface8d"
+    "create-components": "npx @dojoengine/core ../dojo-project/target/dev/manifest.json src/dojo/contractComponents.ts http://localhost:5050 0x62b2f732f2762a3fafebe0f43a75ede40b1cddb1e8827d324d54d60ce436201"
   },
   "dependencies": {
     "@dojoengine/core": "^0.1.55",
@@ -24,6 +24,7 @@
     "ethers": "^5.7.2",
     "graphql": "^16.7.1",
     "graphql-request": "^6.1.0",
+    "math-js": "^1.0.1",
     "mobx": "^6.9.0",
     "proxy-deep": "^3.1.1",
     "react": "^18.2.0",

@@ -22,7 +22,7 @@ struct Square {
     x: u8,
     #[key]
     y: u8,
-    state: SquareValue
+    value: u8
 
 }
 

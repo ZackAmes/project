@@ -57,31 +57,31 @@ mod actions {
                         game_id: 0, turn: true
                     },
                     Square {
-                        game_id: 0, x: 0, y:0, state: SquareValue::N
+                        game_id: 0, x: 0, y:0, value:0
                     },
                     Square {
-                        game_id: 0, x: 1, y:0, state: SquareValue::N
+                        game_id: 0, x: 1, y:0, value:0
                     },
                     Square {
-                        game_id: 0, x: 2, y:0, state: SquareValue::N
+                        game_id: 0, x: 2, y:0, value:0
                     },
                     Square {
-                        game_id: 0, x: 0, y:1, state: SquareValue::N
+                        game_id: 0, x: 0, y:1, value:0
                     },
                     Square {
-                        game_id: 0, x: 1, y:1, state: SquareValue::N
+                        game_id: 0, x: 1, y:1, value:0
                     },
                     Square {
-                        game_id: 0, x: 2, y:1, state: SquareValue::N
+                        game_id: 0, x: 2, y:1, value:0
                     },
                     Square {
-                        game_id: 0, x: 0, y:2, state: SquareValue::N
+                        game_id: 0, x: 0, y:2, value:0
                     },
                     Square {
-                        game_id: 0, x: 1, y:2, state: SquareValue::N
+                        game_id: 0, x: 1, y:2, value:0
                     },
                     Square {
-                        game_id: 0, x: 2, y:2, state: SquareValue::N
+                        game_id: 0, x: 2, y:2, value:0
                     }
 
 
@@ -93,19 +93,19 @@ mod actions {
             let world = self.world_dispatcher.read();
             let square = get!(world, (game_id, x, y), (Square));
             
-            assert(square.state == SquareValue::N, 'square taken');
+            assert(square.value == 0, 'square taken');
 
             let game = get!(world, game_id, (TicTacToe));
             let turn = game.turn;
             
             if(turn) {
                 set!(world, Square {
-                    game_id: game_id, x: x, y: y, state: SquareValue::X
+                    game_id: game_id, x: x, y: y, value: 1
                 })
             }
             else {
                  set!(world, Square {
-                    game_id: game_id, x: x, y: y, state: SquareValue::O
+                    game_id: game_id, x: x, y: y, value: 2
                 })
             }           
             set!(world, TicTacToe {

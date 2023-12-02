@@ -1,13 +1,12 @@
 import { useDojo } from "./DojoContext";
 import { useComponentValue, useSync } from "@dojoengine/react";
 import { Entity } from "@dojoengine/recs";
-import { setComponentsFromGraphQLEntities, getEntityIdFromKeys } from "@dojoengine/utils";
+import { getEntityIdFromKeys } from "@dojoengine/utils";
 import Secret from "./components/Secret";
 import Button from "./components/Button";
 import Board from "./components/Board";
 import {Canvas} from '@react-three/fiber';
 import { FlyControls } from "@react-three/drei";
-import {Euler} from 'three'
 
 function App() {
   const {
@@ -40,8 +39,10 @@ function App() {
     let tempSquares = []
     let tempIds = []
     for(let j=0; j<3; j++){
-      tempIds.push(getEntityIdFromKeys([BigInt(0),BigInt(i),BigInt(j)]))
-      tempSquares.push(useComponentValue(components.Square, getEntityIdFromKeys([BigInt(0),BigInt(i),BigInt(j)])))
+      let id = getEntityIdFromKeys([BigInt(0),BigInt(i),BigInt(j)])
+      tempIds.push(id)
+      tempSquares.push(useComponentValue(components.Square, id))
+      //useSync(torii_client, SquareContract, [id])
     }
     squareStates.push(tempSquares)
     squareIds.push(tempIds)
@@ -50,9 +51,9 @@ function App() {
   console.log(squareStates)
   console.log(squareIds)
   // use graphql to current state data
-  useSync(torii_client, SecretContract, [entityId])
-  // useSync(torii_client, SquareContract, squareIds.flat())
-
+  //useSync(torii_client, SecretContract, [entityId])
+  //useSync(torii_client, SquareContract, [squareIds[0][0]])
+  
   return (
     <>
       <div className="card">
@@ -69,8 +70,8 @@ function App() {
         </select>
       </div>
       <div id="canvas-container">
-        <Canvas style={{height: 800, width:800}} camera={{ position: [0, 0, 5], zoom: 1, up: [0, 0, 1], far: 10000 }}>
-          <FlyControls dragToLook={true} rotation={new Euler(0, 1.5, 0, "XYZ")}/>
+        <Canvas style={{height: 800, width:800}} camera={{rotation:[0,0,0], position: [0, 0, 5], zoom: 1, up: [0, 0, 1], far: 10000 }}  >
+          <FlyControls dragToLook={true} />
           <pointLight position={[10, 10, 10]} />
           <Button x={2.2} y={0} z={0} label={"spawn"} click={() => spawn(account)}/>
           <Button x={-2.2} y={2} z={0} label={"clear"} click={clear}/>
