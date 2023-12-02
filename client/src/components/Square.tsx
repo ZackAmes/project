@@ -28,7 +28,7 @@ const Square: FC<SquareProps> = ({x,y,z,xIndex,yIndex,state,color, click}) => {
                 <boxGeometry/>
                 <meshBasicMaterial color={color}/>
             </mesh>
-            <mesh position = {[x,y-.1,z-1]} scale={.75}>
+            <mesh position = {[x,y-.1,z-1.4]} scale={.75}>
                 <Text color="black">
                     {stateRender(state)}
                 </Text>

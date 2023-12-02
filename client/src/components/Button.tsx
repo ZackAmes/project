@@ -13,7 +13,7 @@ interface ButtonProps {
 const Button: FC<ButtonProps> = ({x, y, z, label, click}) => {
     return (
     <>
-        <mesh position={[x,y,z]} onClick={click}>
+        <mesh rotation={[Math.PI/4,0,0]} position={[x,y,z]} onClick={click}>
             <Text scale={[.5, .5, .5]}>
                 {label}
             </Text>

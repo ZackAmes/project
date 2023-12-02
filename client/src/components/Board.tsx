@@ -23,39 +23,39 @@ const Board: FC<BoardProps> = ({game_id, components, account, takeTurn, coords, 
     return (
         <>
         <Square x={0} y={0} z={0} 
-            state={squareStates[1][1]? squareStates[1][1].state : " "}
+            state={squareStates[1][1]? squareStates[1][1].value : " "}
             color="red" click={() => takeTurn(account, "0", 1, 1)}
         />
         <Square x={1} y={0} z={0} 
-            state={squareStates[2][1]? squareStates[2][1].state : " "}
+            state={squareStates[2][1]? squareStates[2][1].value : " "}
             color="blue" click={() => takeTurn(account, "0", 2, 1)}
         />
         <Square x={-1} y={0} z={0} 
-            state={squareStates[1][1]? squareStates[0][1].state : " "} 
+            state={squareStates[1][1]? squareStates[0][1].value : " "} 
             color="blue" click={() => takeTurn(account, "0", 0, 1)}
         />
         <Square x={0} y={1} z={0} 
-            state={squareStates[1][1]? squareStates[1][2].state : " "} 
+            state={squareStates[1][1]? squareStates[1][2].value : " "} 
             color="blue" click={() => takeTurn(account, "0", 1, 2)}
         />
         <Square x={1} y={1} z={0} 
-            state={squareStates[1][1]? squareStates[2][2].state : " "} 
+            state={squareStates[1][1]? squareStates[2][2].value : " "} 
             color="red" click={() => takeTurn(account, "0", 2, 2)}
         />
         <Square x={-1} y={1} z={0} 
-            state={squareStates[1][1]? squareStates[0][2].state : " "} 
+            state={squareStates[1][1]? squareStates[0][2].value : " "} 
             color="red" click={() => takeTurn(account, "0", 0, 2)}
         />
         <Square x={0} y={-1} z={0} 
-            state={squareStates[1][1]? squareStates[1][0].state : " "} 
+            state={squareStates[1][1]? squareStates[1][0].value : " "} 
             color="blue" click={() => takeTurn(account, "0", 1, 0)}
         />
         <Square x={1} y={-1} z={0} 
-            state={squareStates[1][1]? squareStates[2][0].state : " "} 
+            state={squareStates[1][1]? squareStates[2][0].value : " "} 
             color="red" click={() => takeTurn(account, "0", 2, 0)}
         />
         <Square x={-1} y={-1} z={0}
-            state={squareStates[1][1]? squareStates[0][0].state : " "}
+            state={squareStates[1][1]? squareStates[0][0].value : " "}
             color="red" click={() => takeTurn(account, "0", 0, 0)}
         />
         </>

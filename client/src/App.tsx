@@ -7,6 +7,7 @@ import Button from "./components/Button";
 import Board from "./components/Board";
 import {Canvas} from '@react-three/fiber';
 import { FlyControls } from "@react-three/drei";
+import { AxesHelper } from "three";
 
 function App() {
   const {
@@ -51,7 +52,7 @@ function App() {
   console.log(squareStates)
   console.log(squareIds)
   // use graphql to current state data
-  //useSync(torii_client, SecretContract, [entityId])
+  useSync(torii_client, SecretContract, [entityId])
   //useSync(torii_client, SquareContract, [squareIds[0][0]])
   
   return (
@@ -70,7 +71,9 @@ function App() {
         </select>
       </div>
       <div id="canvas-container">
-        <Canvas style={{height: 800, width:800}} camera={{rotation:[0,0,0], position: [0, 0, 5], zoom: 1, up: [0, 0, 1], far: 10000 }}  >
+        <Canvas style={{height: 800, width:800}} 
+                camera={{rotation:[Math.PI/3,0,0], position: [0, -7, 3], zoom: 1, up: [0, 0, 1], far: 10000 }}  >
+          <axesHelper/>
           <FlyControls dragToLook={true} />
           <pointLight position={[10, 10, 10]} />
           <Button x={2.2} y={0} z={0} label={"spawn"} click={() => spawn(account)}/>
