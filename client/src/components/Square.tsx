@@ -1,5 +1,6 @@
 import {FC} from 'react';
 import {Text} from '@react-three/drei';
+import Piece from './Piece';
 
 interface SquareProps {
     x: number,
@@ -28,11 +29,7 @@ const Square: FC<SquareProps> = ({x,y,z,xIndex,yIndex,state,color, click}) => {
                 <boxGeometry/>
                 <meshBasicMaterial color={color}/>
             </mesh>
-            <mesh position = {[x,y-.1,z-1.4]} scale={.75}>
-                <Text color="black">
-                    {stateRender(state)}
-                </Text>
-            </mesh>
+            <Piece x={x} y={y-.1} z={z-1.4} type={parseInt(state)}/>
         </>
     )
 }
