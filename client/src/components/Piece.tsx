@@ -18,7 +18,7 @@ const getColor = (type: number) => {
 }
 
 const Piece: FC<PieceProps> = ({x,y,z,type, player}) => {
-    if(type == 1 || type == 2){
+    if(type > 0){
         return (
             <mesh rotation={[Math.PI/2, 0, 0]} position={[x,y,z]} scale={.25}>
                 <cylinderGeometry />

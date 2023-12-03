@@ -80,7 +80,7 @@ function App() {
           <Button x={-2.2} y={2} z={0} label={"clear"} click={clear}/>
           <Button x={2.2} y={2} z={0} label={"create"} click={create}/>
           <Board account={account} game_id="0" components={components} 
-                 takeTurn={takeTurn} coords={[0,0,0]} squareStates={squareStates}
+                 takeTurn={takeTurn} coords={[0,0,0]} squareStates={squareStates} squareIds={squareIds}
           />
           <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 155)}/>
 
