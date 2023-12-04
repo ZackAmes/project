@@ -35,19 +35,19 @@ const Chess: FC<ChessProps> = () => {
 
 
     let squares = squareStates.flat().map( (square, index) => {
-        if(square){
+        
             let x = index % 8;
             let y = Math.floor(index / 8)
-            let drawX = x - 1
-            let drawY = y - 1
+            let drawX = x +3
+            let drawY = y +3
             let type = squareStates[x][y];
             //TODO improve color
-            let color = (x%2===0 && y%2===0) ? "black" : "grey"
+            let color = (x%2===0 && y%2===0)  ? "black" : "grey"
             return <Square key={squareIds[x][y]} x={drawX} y={drawY} z={0} 
                         state={type}
                         color={color} click={() => console.log("clicked " + type + " at: (" + x + "," + y + ")" )}
                     />
-        }
+        
     }    
 )
     return (
