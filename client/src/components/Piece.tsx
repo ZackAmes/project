@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import { CylinderGeometry } from 'three';
 
 
 interface PieceProps {
@@ -14,6 +13,10 @@ const getColor = (type: number) => {
     switch(type){
         case 1: return "green"
         case 2: return "purple"
+        case 3: return "red"
+        case 4: return "blue"
+        case 5: return "yellow"
+        case 6: return "orange"
     }
 }
 

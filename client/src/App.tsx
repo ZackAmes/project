@@ -5,9 +5,10 @@ import { getEntityIdFromKeys } from "@dojoengine/utils";
 import Secret from "./components/Secret";
 import Button from "./components/Button";
 import Board from "./components/Board";
+import Chess from "./components/Chess";
 import {Canvas} from '@react-three/fiber';
 import { FlyControls } from "@react-three/drei";
-import { AxesHelper } from "three";
+
 
 function App() {
   const {
@@ -54,7 +55,9 @@ function App() {
   // use graphql to current state data
   useSync(torii_client, SecretContract, [entityId])
   //useSync(torii_client, SquareContract, [squareIds[0][0]])
-  
+  //useSync(torii_client, TicTacToeContract, ["0" as Entity])
+
+  console.log(useComponentValue(components.TicTacToe, "0" as Entity))
   return (
     <>
       <div className="card">
@@ -82,9 +85,9 @@ function App() {
           <Board account={account} game_id="0" components={components} 
                  takeTurn={takeTurn} coords={[0,0,0]} squareStates={squareStates} squareIds={squareIds}
           />
+          <Chess/>
           <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 155)}/>
 
-          
         </Canvas>  
       </div>
     </>

@@ -8,7 +8,7 @@ interface SquareProps {
     z: number,
     xIndex?: number,
     yIndex?:number,
-    state: string,
+    state: number,
     color: string,
     click?: () => any
 
@@ -21,6 +21,18 @@ const stateRender = (state: string) => {
     if(state == "2") return "O"
 }
 
+let getPieceType = (type: number) => {
+    switch(type){
+        case 0: return "none"
+        case 1: return "pawn"
+        case 2: return "rook"
+        case 3: return "knight"
+        case 4: return "bishop"
+        case 5: return "queen"
+        case 6: return "king"
+    }
+}
+
 const Square: FC<SquareProps> = ({x,y,z,xIndex,yIndex,state,color, click}) => {
     return (
         <>
@@ -29,7 +41,7 @@ const Square: FC<SquareProps> = ({x,y,z,xIndex,yIndex,state,color, click}) => {
                 <boxGeometry/>
                 <meshBasicMaterial color={color}/>
             </mesh>
-            <Piece x={x} y={y-.1} z={z-1.4} type={parseInt(state)}/>
+            <Piece x={x} y={y-.1} z={z-1.4} type={state}/>
         </>
     )
 }
