@@ -41,8 +41,7 @@ const Chess: FC<ChessProps> = () => {
             let drawX = x +3
             let drawY = y +3
             let type = squareStates[x][y];
-            //TODO improve color
-            let color = (x%2===0 && y%2===0)  ? "black" : "grey"
+            let color = (x%2===0 && y%2===0) || (x%2===1 && y%2===1) ? "black" : "grey"
             return <Square key={squareIds[x][y]} x={drawX} y={drawY} z={0} 
                         state={type}
                         color={color} click={() => console.log("clicked " + type + " at: (" + x + "," + y + ")" )}
