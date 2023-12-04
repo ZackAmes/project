@@ -82,7 +82,7 @@ function App() {
           <Button x={2.2} y={0} z={0} label={"spawn"} click={() => spawn(account)}/>
           <Button x={-2.2} y={2} z={0} label={"clear"} click={clear}/>
           <Button x={2.2} y={2} z={0} label={"create"} click={create}/>
-          <Board account={account} game_id="0" components={components} 
+          <Board account={account} game_id="0"
                  takeTurn={takeTurn} coords={[0,0,0]} squareStates={squareStates} squareIds={squareIds}
           />
           <Chess/>

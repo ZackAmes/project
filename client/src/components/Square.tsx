@@ -3,11 +3,7 @@ import {Text} from '@react-three/drei';
 import Piece from './Piece';
 
 interface SquareProps {
-    x: number,
-    y: number,
-    z: number,
-    xIndex?: number,
-    yIndex?:number,
+    coords: number[],
     state: number,
     color: string,
     click?: () => any
@@ -33,15 +29,20 @@ let getPieceType = (type: number) => {
     }
 }
 
-const Square: FC<SquareProps> = ({x,y,z,xIndex,yIndex,state,color, click}) => {
+const Square: FC<SquareProps> = ({coords, state,color, click}) => {
+    let x = coords[0]
+    let y = coords[1]
+    let z = coords[2]
+
+
     return (
         <>
 
             <mesh position = {[x,y,z-2]} onClick={click}>
-                <boxGeometry/>
+                <boxGeometry args={[1,1,.01]}/>
                 <meshBasicMaterial color={color}/>
             </mesh>
-            <Piece x={x} y={y-.1} z={z-1.4} type={state}/>
+            <Piece x={x} y={y-.1} z={z-1.9} type={state}/>
         </>
     )
 }
