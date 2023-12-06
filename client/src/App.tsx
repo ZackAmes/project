@@ -44,7 +44,7 @@ function App() {
       let id = getEntityIdFromKeys([BigInt(0),BigInt(i),BigInt(j)])
       tempIds.push(id)
       tempSquares.push(useComponentValue(components.Square, id))
-      //useSync(torii_client, SquareContract, [id])
+      useSync(torii_client, SquareContract, [id])
     }
     squareStates.push(tempSquares)
     squareIds.push(tempIds)
@@ -79,13 +79,13 @@ function App() {
           <axesHelper/>
           <FlyControls dragToLook={true} />
           <pointLight position={[10, 10, 10]} />
-          <Button x={2.2} y={0} z={0} label={"spawn"} click={() => spawn(account)}/>
-          <Button x={-2.2} y={2} z={0} label={"clear"} click={clear}/>
-          <Button x={2.2} y={2} z={0} label={"create"} click={create}/>
+          <Button coords={[2.5,0,0]} label={"spawn"} click={() => spawn(account)}/>
+          <Button coords={[2.5,-2.5,0]} label={"clear"} click={clear}/>
+          <Button coords={[-2.5, 2.5,0]} label={"create"} click={create}/>
           <Board account={account} game_id="0"
-                 takeTurn={takeTurn} coords={[0,0,0]} squareStates={squareStates} squareIds={squareIds}
+                 takeTurn={takeTurn} coords={[0,-2,-2]} squareStates={squareStates} squareIds={squareIds}
           />
-          <Chess/>
+          <Chess coords={[0,3,-3]}/>
           <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 155)}/>
 
         </Canvas>  

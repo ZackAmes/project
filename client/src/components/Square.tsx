@@ -38,11 +38,11 @@ const Square: FC<SquareProps> = ({coords, state,color, click}) => {
     return (
         <>
 
-            <mesh position = {[x,y,z-2]} onClick={click}>
+            <mesh position = {[x,y,z]} onClick={click}>
                 <boxGeometry args={[1,1,.01]}/>
                 <meshBasicMaterial color={color}/>
             </mesh>
-            <Piece x={x} y={y-.1} z={z-1.9} type={state}/>
+            <Piece coords={coords} type={state}/>
         </>
     )
 }

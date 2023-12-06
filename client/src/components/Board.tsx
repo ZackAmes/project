@@ -15,20 +15,16 @@ interface BoardProps {
 
 const Board: FC<BoardProps> = ({game_id, account, takeTurn, coords, squareStates, squareIds}) => {
     
-    let x = coords[0]
-    let y = coords[1]
-    let z = coords[2]
-
-
     let squares = squareStates.flat().map( (square) => {
             console.log(square)
             if(square){
                 let x = square.x
                 let y = square.y
-                let drawX = x - 1
-                let drawY = y - 1
+                let drawX = x + coords[0]
+                let drawY = y + coords[1]
+                let drawZ = coords[2]
                 let color = (x%2===0 && y%2===0) || (x%2===1 && y%2===1) ? "blue" : "red"
-                return <Square key={squareIds[x][y]} coords={[drawX,drawY,0]} 
+                return <Square key={squareIds[x][y]} coords={[drawX,drawY,drawZ]} 
                             state={square.value}
                             color={color} click={() => takeTurn(account, game_id, x, y)}
                         />

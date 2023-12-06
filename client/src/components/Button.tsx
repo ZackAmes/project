@@ -4,16 +4,14 @@ import {Text} from '@react-three/drei';
 
 interface ButtonProps {
     label: string
-    x:number
-    y:number
-    z:number
+    coords: number[]
     click : () => any
 } 
 
-const Button: FC<ButtonProps> = ({x, y, z, label, click}) => {
+const Button: FC<ButtonProps> = ({coords, label, click}) => {
     return (
     <>
-        <mesh rotation={[Math.PI/2,0,0]} position={[x,y,z]} onClick={click}>
+        <mesh rotation={[Math.PI/2,0,0]} position={[coords[0], coords[1], coords[2]]} onClick={click}>
             <Text scale={[.5, .5, .5]}>
                 {label}
             </Text>

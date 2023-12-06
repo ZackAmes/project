@@ -2,9 +2,7 @@ import {FC} from 'react';
 
 
 interface PieceProps {
-    x: number,
-    y: number,
-    z: number,
+    coords: number[]
     type: number
     player?: number
 }
@@ -20,10 +18,10 @@ const getColor = (type: number) => {
     }
 }
 
-const Piece: FC<PieceProps> = ({x,y,z,type, player}) => {
+const Piece: FC<PieceProps> = ({coords,type, player}) => {
     if(type > 0){
         return (
-            <mesh rotation={[Math.PI/2, 0, 0]} position={[x,y,z]} scale={.25}>
+            <mesh rotation={[Math.PI/2, 0, 0]} position={[coords[0],coords[1],coords[2]]} scale={.25}>
                 <cylinderGeometry />
                 <meshBasicMaterial color={getColor(type)}/>
             </mesh>
