@@ -42,7 +42,7 @@ mod actions {
             let world = self.world_dispatcher.read();
 
             // Get the address of the current caller, possibly the player's address.
-            let player = get_caller_address();
+            let caller = get_caller_address();
 
             // Update the world state with the new data.
             // 1. Increase the player's remaining moves by 10.
@@ -51,10 +51,10 @@ mod actions {
                 world,
                 (
                     Secret {
-                        player, value:0
+                        player: caller, value:0
                     },
                     TicTacToe {
-                        game_id: 0, turn: true
+                        player_one: caller, player_two:caller, game_id: 0, turn: true
                     },
                     Square {
                         game_id: 0, x: 0, y:0, value:0
@@ -92,12 +92,21 @@ mod actions {
         fn takeTurn(self: @ContractState, game_id: felt252, x: u8, y: u8) {
             let world = self.world_dispatcher.read();
             let square = get!(world, (game_id, x, y), (Square));
+            let game = get!(world, game_id, (TicTacToe));
+            let turn = game.turn;
+            let caller = get_caller_address();
+            let player_one = game.player_one;
+            let player_two = game.player_two;
+
+            if(turn) {
+                assert(caller == player_one, 'not turn player, 1s turn')
+            }
+            else {
+                assert(caller == player_two, 'not turn player, 2s turn')
+            }
             
             assert(square.value == 0, 'square taken');
 
-            let game = get!(world, game_id, (TicTacToe));
-            let turn = game.turn;
-            
             if(turn) {
                 set!(world, Square {
                     game_id: game_id, x: x, y: y, value: 1
@@ -109,7 +118,7 @@ mod actions {
                 })
             }           
             set!(world, TicTacToe {
-                game_id: game_id, turn: !turn
+                player_one: player_one, player_two:player_two, game_id: game_id, turn: !turn
             }) 
 
         }

@@ -8,11 +8,14 @@ struct Secret {
 }
 
 #[derive(Model, Drop, Serde)]
-struct TicTacToe { 
+struct TicTacToe {
     #[key]
     game_id: felt252,
+    player_one: ContractAddress,
+    player_two: ContractAddress,
     turn: bool
 }
+
 
 #[derive(Model, Drop, Serde)]
 struct Square {

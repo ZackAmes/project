@@ -147,6 +147,8 @@ export type TicTacToe = {
   __typename?: 'TicTacToe';
   entity?: Maybe<World__Entity>;
   game_id?: Maybe<Scalars['felt252']['output']>;
+  player_one?: Maybe<Scalars['ContractAddress']['output']>;
+  player_two?: Maybe<Scalars['ContractAddress']['output']>;
   turn?: Maybe<Scalars['bool']['output']>;
 };
 
@@ -170,6 +172,8 @@ export type TicTacToeOrder = {
 
 export enum TicTacToeOrderField {
   GameId = 'GAME_ID',
+  PlayerOne = 'PLAYER_ONE',
+  PlayerTwo = 'PLAYER_TWO',
   Turn = 'TURN'
 }
 
@@ -181,6 +185,20 @@ export type TicTacToeWhereInput = {
   game_idLT?: InputMaybe<Scalars['felt252']['input']>;
   game_idLTE?: InputMaybe<Scalars['felt252']['input']>;
   game_idNEQ?: InputMaybe<Scalars['felt252']['input']>;
+  player_one?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_oneEQ?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_oneGT?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_oneGTE?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_oneLT?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_oneLTE?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_oneNEQ?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_two?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_twoEQ?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_twoGT?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_twoGTE?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_twoLT?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_twoLTE?: InputMaybe<Scalars['ContractAddress']['input']>;
+  player_twoNEQ?: InputMaybe<Scalars['ContractAddress']['input']>;
   turn?: InputMaybe<Scalars['bool']['input']>;
 };
 

@@ -44,7 +44,7 @@ function App() {
       let id = getEntityIdFromKeys([BigInt(0),BigInt(i),BigInt(j)])
       tempIds.push(id)
       tempSquares.push(useComponentValue(components.Square, id))
-      useSync(torii_client, SquareContract, [id])
+      //useSync(torii_client, SquareContract, [id])
     }
     squareStates.push(tempSquares)
     squareIds.push(tempIds)
@@ -57,7 +57,7 @@ function App() {
   //useSync(torii_client, SquareContract, [squareIds[0][0]])
   //useSync(torii_client, TicTacToeContract, ["0" as Entity])
 
-  console.log(useComponentValue(components.TicTacToe, "0" as Entity))
+  console.log(useComponentValue(components.TicTacToe, getEntityIdFromKeys([BigInt(0)])))
   return (
     <>
       <div className="card">

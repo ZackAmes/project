@@ -7,11 +7,12 @@ export function defineContractComponents(world: World) {
 	  Secret: (() => {
 	    return defineComponent(
 	      world,
-	      { player: RecsType.String, value: RecsType.Number },
+	      { player: RecsType.BigInt, value: RecsType.Number },
 	      {
 	        metadata: {
 	          name: "Secret",
-	          types: [],
+	          types: ["contractaddress","u8"],
+	          customTypes: [],
 	        },
 	      }
 	    );
@@ -19,11 +20,12 @@ export function defineContractComponents(world: World) {
 	  Square: (() => {
 	    return defineComponent(
 	      world,
-	      { game_id: RecsType.Number, x: RecsType.Number, y: RecsType.Number, value: RecsType.Number },
+	      { game_id: RecsType.BigInt, x: RecsType.Number, y: RecsType.Number, value: RecsType.Number },
 	      {
 	        metadata: {
 	          name: "Square",
-	          types: [],
+	          types: ["felt252","u8","u8","u8"],
+	          customTypes: [],
 	        },
 	      }
 	    );
@@ -31,11 +33,12 @@ export function defineContractComponents(world: World) {
 	  TicTacToe: (() => {
 	    return defineComponent(
 	      world,
-	      { game_id: RecsType.Number, turn: RecsType.Boolean },
+	      { game_id: RecsType.BigInt, player_one: RecsType.BigInt, player_two: RecsType.BigInt, turn: RecsType.Boolean },
 	      {
 	        metadata: {
 	          name: "TicTacToe",
-	          types: [],
+	          types: ["felt252","contractaddress","contractaddress","bool"],
+	          customTypes: [],
 	        },
 	      }
 	    );
