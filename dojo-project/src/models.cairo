@@ -26,8 +26,8 @@ struct Square {
     #[key]
     y: u8,
     value: u8
-
 }
+
 
 #[derive(Serde, Drop, Copy, PartialEq, Introspect)]
 enum SquareValue {

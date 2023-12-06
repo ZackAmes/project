@@ -1,9 +1,12 @@
 // define the interface
+use starknet::{ContractAddress};
+
 #[starknet::interface]
 trait IActions<TContractState> {
     fn spawn(self: @TContractState);
     fn setSecret(self: @TContractState, value: u8);
     fn takeTurn(self: @TContractState, game_id: felt252, x: u8, y: u8);
+    fn challenge(self: @TContractState, opp: ContractAddress);
 
 }
 
@@ -13,6 +16,8 @@ mod actions {
     use starknet::{ContractAddress, get_caller_address};
     use project::models::{Secret, Square, TicTacToe, SquareValue};
     use super::IActions;
+
+    const counter: u32 = 0_u32;
 
     // declaring custom event struct
     #[event]
@@ -87,6 +92,7 @@ mod actions {
 
                 )
             );
+            let counter = counter + 1;
         }
 
         fn takeTurn(self: @ContractState, game_id: felt252, x: u8, y: u8) {
@@ -120,6 +126,48 @@ mod actions {
             set!(world, TicTacToe {
                 player_one: player_one, player_two:player_two, game_id: game_id, turn: !turn
             }) 
+
+        }
+
+        fn challenge(self: @ContractState, opp: ContractAddress){
+            let world = self.world_dispatcher.read();
+            let caller = get_caller_address();
+
+            let id:felt252 = counter.into();
+
+            set!(world, (
+                TicTacToe {
+                        player_one: caller, player_two:opp, game_id: id, turn: true
+                    },
+                    Square {
+                        game_id: id, x: 0, y:0, value:0
+                    },
+                    Square {
+                        game_id: id, x: 1, y:0, value:0
+                    },
+                    Square {
+                        game_id: id, x: 2, y:0, value:0
+                    },
+                    Square {
+                        game_id: id, x: 0, y:1, value:0
+                    },
+                    Square {
+                        game_id: id, x: 1, y:1, value:0
+                    },
+                    Square {
+                        game_id: id, x: 2, y:1, value:0
+                    },
+                    Square {
+                        game_id: id, x: 0, y:2, value:0
+                    },
+                    Square {
+                        game_id: id, x: 1, y:2, value:0
+                    },
+                    Square {
+                        game_id: id, x: 2, y:2, value:0
+                    }
+            ));
+            let counter = counter + 1;
 
         }
 
