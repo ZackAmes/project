@@ -79,9 +79,9 @@ function App() {
           <axesHelper/>
           <FlyControls dragToLook={true} />
           <pointLight position={[10, 10, 10]} />
-          <Button coords={[2.5,0,0]} label={"spawn"} click={() => spawn(account)}/>
-          <Button coords={[2.5,-2.5,0]} label={"clear"} click={clear}/>
-          <Button coords={[-2.5, 2.5,0]} label={"create"} click={create}/>
+          <Button scale = {5} coords={[0,2.5,2.5]} label={"spawn"} click={() => spawn(account)}/>
+          <Button coords={[-2.5,-2.5,0]} label={"clear"} click={clear}/>
+          <Button coords={[-2.5, -3,0]} label={"create"} click={create}/>
           <Board account={account} game_id="0"
                  takeTurn={takeTurn} coords={[0,-2,-2]} squareStates={squareStates} squareIds={squareIds}
           />
