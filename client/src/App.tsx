@@ -6,6 +6,7 @@ import Secret from "./components/Secret";
 import Button from "./components/Button";
 import Board from "./components/Board";
 import Chess from "./components/Chess";
+import Burners from "./components/Burners";
 import {Canvas} from '@react-three/fiber';
 import { FlyControls } from "@react-three/drei";
 import AccRender from "./components/AccRender";
@@ -62,19 +63,6 @@ function App() {
   console.log(useComponentValue(components.TicTacToe, getEntityIdFromKeys([BigInt(0)])))
   return (
     <>
-      <div className="card">
-        select signer:{" "}
-        <select onChange={(e) => select(e.target.value)}>
-          {list().map((account, index) => {
-            return (
-              <option value={account.address} key={index}>
-                {account.address}
-              </option>
-            );
-          })}
-          i
-        </select>
-      </div>
       <div id="canvas-container">
         <Canvas style={{height: 800, width:800}} 
                 camera={{rotation:[Math.PI/3,0,0], position: [0, -7, 3], zoom: 1, up: [0, 0, 1], far: 10000 }}  >
@@ -82,15 +70,15 @@ function App() {
           <FlyControls dragToLook={true} />
           <pointLight position={[10, 10, 10]} />
           <Button scale = {3} coords={[0,2.5,3]} label={"spawn"} click={() => spawn(account)}/>
-          <Button scale = {.5} coords={[-2.5,-2.5,0]} label={"clear"} click={clear}/>
-          <Button scale = {.5} coords={[-2.5, -3,0]} label={"create"} click={create}/>
           <Board account={account} game_id="0"
                  takeTurn={takeTurn} coords={[0,-2,-2]} squareStates={squareStates} squareIds={squareIds}
           />
           <Chess coords={[0,3,-3]}/>
           <Secret value={secret ? secret.value : 0} click={() => setSecret(account, 155)}/>
-          <AccRender account={account}/>
+          <Burners coords={[-2,0,0]} select={select} list={list} clear={clear} create={create} isDeploying={isDeploying}/>
 
+          <Button color = "black" scale= {.3} coords = {[0,-1,2.3]} label="signer" click={() => console.log(account.address)}/>
+          <AccRender coords={[0,-1,2]} account={account} click={() => console.log(account.address)}/>
         </Canvas>  
       </div>
     </>

@@ -13,7 +13,7 @@ const getColor = (value: number) => {
 const Secret: FC<SecretProps> = ({value, click}) => {
     return (
         <>
-            <mesh position={[-2,0,0]} scale={.5} onClick={click}>
+            <mesh position={[4,-2,-1]} scale={.5} onClick={click}>
                 <sphereGeometry />
                 <meshBasicMaterial color={"rgb(" + getColor(value) +",0,0)"} />
             </mesh>
