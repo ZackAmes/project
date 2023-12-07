@@ -8,6 +8,8 @@ import Board from "./components/Board";
 import Chess from "./components/Chess";
 import {Canvas} from '@react-three/fiber';
 import { FlyControls } from "@react-three/drei";
+import AccRender from "./components/AccRender";
+
 
 
 function App() {
@@ -44,7 +46,7 @@ function App() {
       let id = getEntityIdFromKeys([BigInt(0),BigInt(i),BigInt(j)])
       tempIds.push(id)
       tempSquares.push(useComponentValue(components.Square, id))
-      //useSync(torii_client, SquareContract, [id])
+      useSync(torii_client, SquareContract, [id])
     }
     squareStates.push(tempSquares)
     squareIds.push(tempIds)
@@ -79,14 +81,15 @@ function App() {
           <axesHelper/>
           <FlyControls dragToLook={true} />
           <pointLight position={[10, 10, 10]} />
-          <Button scale = {5} coords={[0,2.5,2.5]} label={"spawn"} click={() => spawn(account)}/>
-          <Button coords={[-2.5,-2.5,0]} label={"clear"} click={clear}/>
-          <Button coords={[-2.5, -3,0]} label={"create"} click={create}/>
+          <Button scale = {3} coords={[0,2.5,3]} label={"spawn"} click={() => spawn(account)}/>
+          <Button scale = {.5} coords={[-2.5,-2.5,0]} label={"clear"} click={clear}/>
+          <Button scale = {.5} coords={[-2.5, -3,0]} label={"create"} click={create}/>
           <Board account={account} game_id="0"
                  takeTurn={takeTurn} coords={[0,-2,-2]} squareStates={squareStates} squareIds={squareIds}
           />
           <Chess coords={[0,3,-3]}/>
-          <Secret value={secret ? parseInt(`${secret["value"]}`) : 0} click={() => setSecret(account, 155)}/>
+          <Secret value={secret ? secret.value : 0} click={() => setSecret(account, 155)}/>
+          <AccRender account={account}/>
 
         </Canvas>  
       </div>

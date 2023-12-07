@@ -13,7 +13,7 @@ const Button: FC<ButtonProps> = ({scale=1, coords, label, click}) => {
     return (
     <>
         <mesh scale={scale} rotation={[Math.PI/2,0,0]} position={[coords[0], coords[1], coords[2]]} onClick={click}>
-            <Text color="red" scale={[.5, .5, .5]}>
+            <Text color="red">
                 {label}
             </Text>
             <meshBasicMaterial color="black"/>
