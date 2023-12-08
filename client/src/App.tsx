@@ -17,7 +17,7 @@ function App() {
   const {
     setup: {
       systemCalls: { spawn, setSecret, takeTurn },
-      components,
+      components: {Secret, Square, TicTacToe},
       network: { graphSdk, contractComponents:{
         Secret: SecretContract,
         TicTacToe: TicTacToeContract,
@@ -28,14 +28,9 @@ function App() {
     account: { create, list, select, account, isDeploying, clear },
   } = useDojo();
 
-  // extract query
-  const { getEntities } = graphSdk();
+  const addressId = account.address.toString() as Entity;
 
-  // entity id - this example uses the account address as the entity id
-  const entityId = account.address.toString() as Entity;
-
-  // get current component values
-  const secret = useComponentValue(components.Secret, entityId as Entity);
+  const secret = useComponentValue(Secret, addressId as Entity);
   
   const squareStates = [];
   const squareIds = [];
@@ -46,8 +41,7 @@ function App() {
     for(let j=0; j<3; j++){
       let id = getEntityIdFromKeys([BigInt(0),BigInt(i),BigInt(j)])
       tempIds.push(id)
-      tempSquares.push(useComponentValue(components.Square, id))
-      useSync(torii_client, SquareContract, [id])
+      tempSquares.push(useComponentValue(Square, id))
     }
     squareStates.push(tempSquares)
     squareIds.push(tempIds)
@@ -55,12 +49,8 @@ function App() {
 
   console.log(squareStates)
   console.log(squareIds)
-  // use graphql to current state data
-  useSync(torii_client, SecretContract, [entityId])
-  //useSync(torii_client, SquareContract, [squareIds[0][0]])
-  //useSync(torii_client, TicTacToeContract, ["0" as Entity])
 
-  console.log(useComponentValue(components.TicTacToe, getEntityIdFromKeys([BigInt(0)])))
+  console.log(useComponentValue(TicTacToe, getEntityIdFromKeys([BigInt(0)])))
   return (
     <>
       <div id="canvas-container">
@@ -74,7 +64,6 @@ function App() {
                  takeTurn={takeTurn} coords={[0,-2,-2]} squareStates={squareStates} squareIds={squareIds}
           />
           <Chess coords={[0,3,-3]}/>
-          <Secret value={secret ? secret.value : 0} click={() => setSecret(account, 155)}/>
           <Burners coords={[-2,0,0]} select={select} list={list} clear={clear} create={create} isDeploying={isDeploying}/>
 
           <Button color = "black" scale= {.3} coords = {[0,-1,2.3]} label="signer" click={() => console.log(account.address)}/>
